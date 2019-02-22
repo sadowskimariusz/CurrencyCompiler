@@ -120,8 +120,15 @@ public class Scanner {
             while (isDigit(peek())) advance();
         }
 
-        addToken(NUMBER,
-                Double.parseDouble(source.substring(start, current)));
+        if(peek() == '$') {
+            advance();
+            addToken(CURRENCY, Double.parseDouble(source.substring(start, current-1)));
+
+        } else {
+
+            addToken(NUMBER,
+                    Double.parseDouble(source.substring(start, current)));
+        }
     }
 
     private void string() {
